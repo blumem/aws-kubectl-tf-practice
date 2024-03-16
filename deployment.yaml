@@ -1,0 +1,30 @@
+# **************************************************************************
+# YAML to manually deploy the ECR image to EKS using kubectl
+# **************************************************************************
+# Execute:
+#    kubectl apply -f deployment.yaml
+# 
+# Note:
+# Usually terraform will perform this step automatically.
+# **************************************************************************
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demoapp-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demoapp 
+  template:
+    metadata:
+      labels:
+        app: demoapp
+    spec:
+      containers:
+        - name: demoapp
+          image: 636480284744.dkr.ecr.eu-central-1.amazonaws.com/demoapp-ecr:demoapp
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          
