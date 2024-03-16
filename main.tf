@@ -183,10 +183,6 @@ resource "null_resource" "configure_kubectl" {
     when = create
     command = "aws eks --region ${var.aws_region} update-kubeconfig --name ${module.eks.cluster_name}"
   }
-  # provisioner "local-exec" {
-  #   when    = destroy
-  #   command = "kubectl config delete-context ${module.eks.cluster_name}"
-  # }
 }
 
 resource "kubernetes_deployment_v1" "java" {
